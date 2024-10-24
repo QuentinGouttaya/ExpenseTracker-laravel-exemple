@@ -1,0 +1,21 @@
+services:
+  laravel-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+  db:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: laravel-app
+      POSTGRES_USER: expense
+      POSTGRES_PASSWORD: expense
+    volumes:
+      - /pgdata:/var/lib/postgresql/data
