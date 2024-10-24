@@ -1,0 +1,1 @@
+{"version":"pest_3.5.0","defects":{"Tests\\Unit\\ExpenseTest::test_it_can_be_instantiated":8},"times":{"Tests\\Feature\\ExampleTest::test_the_application_returns_a_successful_response":0.013,"Tests\\Unit\\ExpenseTest::test_it_can_be_instantiated":0.041}}
