@@ -18,13 +18,14 @@
                 </a>
             </div>
             @auth
-                <div class="space-x-8 font-bold">
-                    <a href="/expenses">Expenses</a>
-                    <a href="/budget">Budget</a>
-                    <a href="/expenses/create">Add Expense</a>
+                <div class="space-x-8">
+                    <a class="hover:before:scale-x-100 hover:before:origin-left relative before:w-full before:h-0.5 before:origin-right before:transition-transform before:duration-300 before:scale-x-0 before:bg-white/50 before:absolute before:left-0 before:bottom-0" href="/expenses">Expenses</a>
+                    <a class="hover:before:scale-x-100 hover:before:origin-left relative before:w-full before:h-0.5 before:origin-right before:transition-transform before:duration-300 before:scale-x-0 before:bg-white/50 before:absolute before:left-0 before:bottom-0" href="/budget">Budget</a>
+                    <a class="hover:before:scale-x-100 hover:before:origin-left relative before:w-full before:h-0.5 before:origin-right before:transition-transform before:duration-300 before:scale-x-0 before:bg-white/50 before:absolute before:left-0 before:bottom-0" href="/expenses/create">Add Expense</a>
+                    <a class="hover:before:scale-x-100 hover:before:origin-left relative before:w-full before:h-0.5 before:origin-right before:transition-transform before:duration-300 before:scale-x-0 before:bg-white/50 before:absolute before:left-0 before:bottom-0" href="/foyer">Foyer</a>
                 </div>
 
-                <div>
+                <div class="hover:scale-110 duration-300" >
                     <a href="/logout">Logout</a>
                 </div>
             @endauth

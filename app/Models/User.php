@@ -22,6 +22,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'foyer_id',
     ];
 
     /**
@@ -48,15 +49,27 @@ class User extends Authenticatable
     }
 
 
-    public function expenses() {
+
+    public function foyer() {
+        return $this->belongsTo(Foyer::class);
+    }
+    public function expenses()
+    {
         return $this->hasMany(Expense::class);
     }
 
-    public function budget() {
+
+    public function budget()
+    {
         return $this->hasOne(Budget::class);
     }
 
-    
+    public function balance()
+    {
+        $budget = $this->budget()->first()->amount;
+        $balance = $this->expenses()->sum('amount');
+        return bcsub($budget, $balance);
+    }
 
-    
+
 }

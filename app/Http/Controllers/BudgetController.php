@@ -12,7 +12,16 @@ class BudgetController extends Controller
             return view('budget.create');   
         } else {
             $budget = auth()->user()->budget()->first();
-            return view('/budget.index', ['budget' => $budget]);
+            $balance = auth()->user()->balance();
+            return view('/budget.index', ['budget' => $budget,'balance'=> $balance]);
+        }
+    }
+
+    public function link() {
+        if (!auth()->user()->budget()->exists()) {
+            return view('budget.create');
+        } else {
+            return view('budget.link');
         }
     }
 
@@ -31,7 +40,23 @@ class BudgetController extends Controller
         $budget = auth()->user()->budget()->create($attributes);
         
 
-        return redirect('/expenses');
+        return redirect('/budget');
+    }
+
+    public function update(Request $request) {
+        $attributes = $request->validate([
+            'amount' => ['required'],
+        ]);
+        auth()->user()->budget()->update($attributes);
+        return redirect('/budget');
+    }
+
+    public function set(Request $request) {
+        $attributes = $request->validate([
+            'amount' => ['required'],
+        ]);
+        $budget = auth()->user()->budget()->create($attributes);
+        return redirect('/budget');
     }
 
 }

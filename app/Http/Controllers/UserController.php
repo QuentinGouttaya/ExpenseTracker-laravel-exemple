@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Foyer;   
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rules\Password;
+
 
 class UserController extends Controller
 {
@@ -38,4 +39,12 @@ class UserController extends Controller
 
         return redirect('/');
     }
+
+    public function addIntoFoyer($user_email) {
+        $foyer_id = User::where('email', $user_email)->first()->foyer_id;
+        $user = auth()->user();
+        $user->foyer_id = $foyer_id;
+        $user->save();
+        return redirect('/');
+}
 }

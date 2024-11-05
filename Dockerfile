@@ -2,7 +2,7 @@ FROM php:8.3-apache
 
  
 
-ARG WWW_USER=1000
+ARG WWW_USER=1001
 
  
 
@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y \
     git \
 
     curl \
+
+    npm \
 
     libpng-dev \
 
@@ -54,6 +56,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 
+
  
 
 # Enable Apache mods
@@ -74,7 +77,7 @@ RUN groupadd --force -g $WWW_USER webapp
 
 RUN useradd -ms /bin/bash --no-user-group -g $WWW_USER -u $WWW_USER webapp
 
- 
+
 
 # Clean cache
 
@@ -87,3 +90,6 @@ RUN apt-get -y autoremove \
  
 
 USER ${WWW_USER}
+
+
+ 

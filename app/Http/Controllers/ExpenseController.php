@@ -29,6 +29,7 @@ class ExpenseController extends Controller
             'amount' => ['required'],
         ]);
 
+        
         $expense = auth()->user()->expenses()->create($attributes);
         
 
@@ -38,6 +39,7 @@ class ExpenseController extends Controller
     public function delete(Expense $expense)
     {
         $expense->delete();
-        return redirect('/expenses');
-    }
+
+        return redirect('/expenses');}
 }
+
