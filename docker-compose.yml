@@ -1,14 +1,4 @@
 services:
-  laravel-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:80"
-    volumes:
-      - ./:/app
-    depends_on:
-      - db
   db:
     image: postgres:17
     ports:
@@ -19,3 +9,16 @@ services:
       POSTGRES_PASSWORD: expense
     volumes:
       - /pgdata:/var/lib/postgresql/data
+  laravel-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+       - WWW_USER=${WWW_USER:-1000}
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
