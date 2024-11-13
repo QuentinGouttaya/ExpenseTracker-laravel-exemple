@@ -6,6 +6,6 @@ chmod -x ./set_user_id_and_start
 
 It will check your UID and echo it into the .env file then it will start docker compose up --build.
 
-entrypoint.sh should not be touched as it will generate an API_KEY for your laravel app to star and migrate:fresh (DB will be wiped then seeded).
+entrypoint.sh should not be touched as it will generate an API_KEY for your laravel app to start and migrate:fresh (DB will be wiped then seeded).
 
 This is a project for educationnal purpose only to work with docker and composer.
