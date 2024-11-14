@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\ExpenseType;
 use App\Models\Budget;
 
 use Illuminate\Http\Request;
@@ -18,19 +19,25 @@ class ExpenseController extends Controller
 
     public function create()
     {
-        
-        return view('expenses.create');
+        $expenseTypes = ExpenseType::all();
+        return view('expenses.create', ['expenseTypes' => $expenseTypes]);
     }
 
     public function store(Request $request)
     {
+
         $attributes = $request->validate([
-            'label' => ['required'],
-            'amount' => ['required'],
+            'expenseType' => ['required', 'integer'],
+            'label' => ['required', 'string'],
+            'amount' => ['required', 'numeric'],
         ]);
 
-        
-        $expense = auth()->user()->expenses()->create($attributes);
+        $expense = auth()->user()->expenses()->create([
+            'expense_type_id' => $attributes['expenseType'],
+            'label' => $attributes['label'],
+            'amount' => $attributes['amount'],
+        ]);
+
         
 
         return redirect('/expenses');

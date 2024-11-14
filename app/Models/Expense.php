@@ -12,6 +12,7 @@ class Expense extends Model
     use HasFactory;
 
     protected $fillable = [
+        'expense_type_id',
         'label',
         'amount',
         'user_id',
@@ -21,6 +22,11 @@ class Expense extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function expenseType()
+    {
+        return $this->belongsTo(ExpenseType::class);
     }
 
     

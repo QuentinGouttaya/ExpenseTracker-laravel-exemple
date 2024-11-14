@@ -3,7 +3,7 @@
 <x-layout>
     <x-page-heading>Foyer</x-page-heading>
 
-    <section class="bg-white/5 rounded-xl">
+    <section class="">
         <h1 class="text-center font-bold text-5xl">Foyer: Budget is {{ $budgetSum }}</h1>
     </section>
 

@@ -1,4 +1,4 @@
-@props(['label', 'name'])
+@props(['label', 'name', 'expenseTypes'])
 
 @php
     $defaults = [
@@ -8,7 +8,7 @@
     ];
 @endphp
 
-<x-forms.field :$label :$name>
+<x-forms.field :$expenseTypes :$label :$name>
     <select {{ $attributes($defaults) }}>
         {{ $slot }}
     </select>
