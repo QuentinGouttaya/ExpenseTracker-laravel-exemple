@@ -3,8 +3,21 @@
 Just git clone the project and cd into the directory. You need to have either docker desktop or docker engine + compose installed.
 
 ```
+// Will set permission to run script
 chmod -x ./set_user_id_and_start
 ```
+
+then run : 
+
+```
+./set_user_id_and_start.sh
+```
+or
+
+```
+sh ./set_user_id_and_start.sh
+```
+
 
 It will check your UID and echo it into the .env file then it will start : ```docker compose up --build```
 
