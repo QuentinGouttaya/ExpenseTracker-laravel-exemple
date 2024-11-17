@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\ExpenseType;
 
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Expense>
  */
-class ExpenseFactory extends Factory
+class ExpenseTypeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,10 +20,8 @@ class ExpenseFactory extends Factory
     public function definition(): array
     {
         return [
-            'label' => fake()->word(),
-            'amount' => fake()->randomFloat(2, 0, 1000),
+            'name' => fake()->word(),        
             'user_id' => User::factory(),
-            'expense_type_id' => ExpenseType::factory(),
         ];
     }
 }

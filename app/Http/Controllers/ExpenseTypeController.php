@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\ExpenseType;
 use Illuminate\Http\Request;
 
+
+
 class ExpenseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-
+    {   
+        $expenseTypes = auth()->user()->expenseTypes()->orderBy("id","desc")->paginate(10);
+        return view('expenseTypes.index', ['expenseTypes' => $expenseTypes]);
     }
 
     /**
@@ -20,7 +23,7 @@ class ExpenseTypeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +31,7 @@ class ExpenseTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $expenseType = ExpenseType::create($request->all());
     }
 
     /**

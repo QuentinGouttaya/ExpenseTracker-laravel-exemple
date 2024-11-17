@@ -64,6 +64,10 @@ class User extends Authenticatable
         return $this->hasOne(Budget::class);
     }
 
+    public function expenseTypes() {
+        return $this->hasMany(ExpenseType::class);
+    }
+
     public function balance()
     {
         $budget = $this->budget()->first()->amount;

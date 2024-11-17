@@ -19,7 +19,7 @@ class ExpenseController extends Controller
 
     public function create()
     {
-        $expenseTypes = ExpenseType::all();
+        $expenseTypes = auth()->user()->expenseTypes()->get();
         return view('expenses.create', ['expenseTypes' => $expenseTypes]);
     }
 
@@ -27,13 +27,13 @@ class ExpenseController extends Controller
     {
 
         $attributes = $request->validate([
-            'expenseType' => ['required', 'integer'],
+            'expense_type_id' => ['required', 'integer'],
             'label' => ['required', 'string'],
             'amount' => ['required', 'numeric'],
         ]);
 
         $expense = auth()->user()->expenses()->create([
-            'expense_type_id' => $attributes['expenseType'],
+            'expense_type_id' => $attributes['expense_type_id'],
             'label' => $attributes['label'],
             'amount' => $attributes['amount'],
         ]);
