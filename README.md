@@ -1,6 +1,6 @@
 ## HOW TO RUN
 
-Just git clone the project and cd into the directory. You need to have either docker desktop or docker engine installed.
+Just git clone the project and cd into the directory. You need to have either docker desktop or docker engine + compose installed.
 
 ```
 chmod -x ./set_user_id_and_start
