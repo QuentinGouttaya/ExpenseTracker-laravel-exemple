@@ -13,9 +13,14 @@ class ExpenseTypeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        $expenseTypes = auth()->user()->expenseTypes()->orderBy("id","desc")->paginate(10);
-        return view('expenseTypes.index', ['expenseTypes' => $expenseTypes]);
+    {
+        $expenseTypes = auth()->user()->expenseTypes();
+        if ($expenseTypes->count() == 0) {
+            return view('expenses.types');
+        } else {
+            return view('expenses.types', ['expenseTypes' => $expenseTypes]);
+        }
+
     }
 
     /**
@@ -23,7 +28,7 @@ class ExpenseTypeController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -31,7 +36,13 @@ class ExpenseTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $expenseType = ExpenseType::create($request->all());
+        $attributes = $request->validate([
+            'name' => ['required', 'string'],
+        ]);
+
+        $expenseType = auth()->user()->expenseTypes()->create($attributes);
+
+        return redirect('/expenses/create');
     }
 
     /**

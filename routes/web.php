@@ -6,6 +6,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\FoyerController;
+use App\Http\Controllers\ExpenseTypeController;
 
 
 Route::get('/', function () {
@@ -20,6 +21,7 @@ Route::post('/budget/update', [BudgetController::class,'update'])->middleware('a
 
 Route::get('/expenses/create', [ExpenseController::class, 'create'])->middleware('auth');
 Route::delete('/expenses/{expense}', [ExpenseController::class, 'delete'])->middleware('auth')->name('expenses.delete');
+Route::get('expenses/types', [ExpenseTypeController::class, 'index'])->middleware('auth');
 
 Route::get('/foyer', [FoyerController::class,'index'])->middleware('auth');
 Route::post('/foyer/store', [FoyerController::class,'store'])->middleware('auth');
@@ -27,6 +29,7 @@ Route::post('/foyer/add', [FoyerController::class,'addIntoFoyer'])->middleware('
 Route::post('/foyer/remove', [FoyerController::class,'removeFromFoyer'])->middleware('auth');
 
 Route::post('/expenses', [ExpenseController::class, 'store'])->middleware('auth');
+Route::post('/expenses/types', [ExpenseTypeController::class, 'store'])->middleware('auth');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [UserController::class, 'create']);

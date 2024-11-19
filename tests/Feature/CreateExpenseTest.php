@@ -17,26 +17,43 @@ class CreateExpenseTest extends TestCase
     {
         $user = User::factory()->create();
         $this->actingAs($user);
+
         // Visit the expenses page
         $this->get('/expenses')->assertStatus(200);
 
-        // Click the "Create Expense" button
-        $this->get('/expenses/create')->assertStatus(200);
+        // Create an expense type
+        $this->get('/expenses/types')->assertStatus(200);
+        $this->post('/expenses/types', ['name' => 'Test Expense Type'])->assertRedirect('/expenses/create');
+
+        // Retrieve the created expense type
+        $expenseType = ExpenseType::where('user_id', $user->id)->where('name', 'Test Expense Type')->first();
+        $this->assertNotNull($expenseType, 'Expense type was not created.');
+        $this->assertEquals($user->id, $expenseType->user_id, 'Expense type user ID does not match.');
 
         // Fill in the expense form with valid data
-        $expenseType = ExpenseType::factory()->create();
         $expenseData = [
-            'expense_type_id' => $expenseType->id,
+            'expenseType' => $expenseType->id, // Use 'expenseType' instead of 'expense_type_id'
             'label' => 'Test Expense',
-            'amount' => 100.00,
-            'created_at' => Carbon::now()
+            'amount' => 151.11,
         ];
 
         // Submit the form
-        $this->post('/expenses', $expenseData)->assertRedirect('/expenses');
+        $response = $this->post('/expenses', $expenseData);
+        $response->assertRedirect('/expenses');
 
         // Verify that the expense is created successfully and appears in the list of expenses
-        $this->assertDatabaseHas('expenses', $expenseData);
-        $this->get('/expenses')->assertSee($expenseData['amount']);
+        $this->assertDatabaseHas('expenses', [
+            'expense_type_id' => $expenseType->id,
+            'label' => 'Test Expense',
+            'amount' => 151.11,
+        ]);
+
+        // Debugging: Print the response content
+        $response = $this->get('/expenses');
+        $response->assertStatus(200);
+        dump($response->getContent());
+
+        // Assert that the amount is displayed on the page
+        $response->assertSee('151.11');
     }
 }

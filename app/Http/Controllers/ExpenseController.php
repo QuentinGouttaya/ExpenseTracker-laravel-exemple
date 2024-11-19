@@ -27,13 +27,15 @@ class ExpenseController extends Controller
     {
 
         $attributes = $request->validate([
-            'expense_type_id' => ['required', 'integer'],
+            'expenseType' => ['required', 'integer'],
             'label' => ['required', 'string'],
             'amount' => ['required', 'numeric'],
         ]);
 
+        
+
         $expense = auth()->user()->expenses()->create([
-            'expense_type_id' => $attributes['expense_type_id'],
+            'expense_type_id' => $attributes['expenseType'],
             'label' => $attributes['label'],
             'amount' => $attributes['amount'],
         ]);
