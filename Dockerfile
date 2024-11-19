@@ -60,4 +60,5 @@ RUN apt-get -y autoremove \
 # Switch to the webapp user
 USER ${WWW_USER}
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+# UNCOMMENT THE FOLLOWING LINE BEFORE USING THE SCRIPT
+## ENTRYPOINT ["/app/entrypoint.sh"]
