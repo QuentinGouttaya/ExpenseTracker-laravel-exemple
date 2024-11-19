@@ -29,6 +29,9 @@ jobs:
     - name: Install dependencies
       run: docker compose exec -T laravel-app composer install
 
+    - name: Install tailwind and vite
+      run: docker compose exec -T laravel-app npm install
+
     - name: Build css ressources
       run: docker compose exec -T laravel-app npm run build
 
