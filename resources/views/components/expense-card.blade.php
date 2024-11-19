@@ -4,7 +4,7 @@
     <div class="text-4xl font-bold py-4">{{ $expense->label }}</div>
     <div class="self-center text-3xl  "> Type: {{ $expense->expenseType->name }}</div>
 
-    <div class="py-4">
+    <div class="">
         <h3 class="group-hover:scale-105 text-x1 font-bold duration-100">
             
             <div class="flex justify-center py-4">

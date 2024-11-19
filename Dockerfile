@@ -55,5 +55,9 @@ RUN apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
+
 # Switch to the webapp user
 USER ${WWW_USER}
+
+ENTRYPOINT ["/app/entrypoint.sh"]

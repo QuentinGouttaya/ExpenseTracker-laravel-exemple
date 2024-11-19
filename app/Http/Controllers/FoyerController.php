@@ -23,9 +23,13 @@ class FoyerController extends Controller
         $foyer_id = auth()->user()->foyer_id;
         $foyer = Foyer::find($foyer_id);
         $budgetSum = $foyer->budgetsSum();
+        $balanceUsersFoyer = 0;
+        foreach ($foyer->users as $user) {
+            $balanceUsersFoyer += $user->balance();
+        }
 
         if ($foyer_id != null) {
-            return view("foyer.index", ['budgetSum' => $budgetSum, 'foyer_id' => $foyer_id]);
+            return view("foyer.index", ['foyerBalance' => $balanceUsersFoyer, 'budgetSum' => $budgetSum, 'foyer_id' => $foyer_id]);
         } else {
             return view("foyer.create");
         }

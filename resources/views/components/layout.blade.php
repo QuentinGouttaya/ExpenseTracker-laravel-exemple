@@ -9,7 +9,7 @@
 
 </head>
 
-<body class="bg-black text-white font-roboto">
+<body class="bg-gradient-to-r from-blue-500 to-indigo-900 text-white font-roboto">
     <div class="px-2 py-1">
         <nav class="flex justify-between items-center py-2 border-b border-white/40">
             <div>

@@ -61,6 +61,7 @@ class User extends Authenticatable
 
     public function budget()
     {
+
         return $this->hasOne(Budget::class);
     }
 
