@@ -1,5 +1,7 @@
 name: Docker Image Expense
 
+
+
 on:
   push:
     branches: [ "master" ]
@@ -8,46 +10,50 @@ on:
 
 jobs:
   build:
+    permissions:
+      id-token: write
+      attestations: write
+      
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-
+  
     - name: Build the Docker images
       run: docker compose build
-
+  
     - name: Start the Docker containers
       run: docker compose up -d
-
+  
     - name: Wait for database to be ready
       run: |
         until docker compose exec -T db pg_isready -U expense; do
           echo "Waiting for database to be ready..."
           sleep 5
         done
-
+  
     - name: Install dependencies
       run: docker compose exec -T laravel-app composer install
-
+  
     - name: Install tailwind and vite
       run: docker compose exec -T laravel-app npm install
-
+  
     - name: Build css ressources
       run: docker compose exec -T laravel-app npm run build
-
+  
     - name: Run migrations
       run: docker compose exec -T laravel-app php artisan migrate
-
+  
     - name: Start Apache server
       run: docker compose exec -T laravel-app apache2ctl start
-
+  
     - name: Run tests
       run: docker compose exec -T laravel-app php artisan test
-
+  
     - name: Stop the Docker containers
       run: docker compose down
-
-                    
-
+  
+                      
+  
     - name: Attest Build Provenance
       uses: actions/attest-build-provenance@v1.4.4
