@@ -17,11 +17,11 @@ jobs:
       run: docker compose build
 
     - name: Start the Docker containers
-      run: docker-compose up -d
+      run: docker compose up -d
 
     - name: Wait for database to be ready
       run: |
-        until docker-compose exec -T db pg_isready -U expense; do
+        until docker compose exec -T db pg_isready -U expense; do
           echo "Waiting for database to be ready..."
           sleep 5
         done
