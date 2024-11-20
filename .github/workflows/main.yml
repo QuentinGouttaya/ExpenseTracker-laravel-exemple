@@ -54,7 +54,7 @@ jobs:
       run: docker compose down
   
     - name: Save Docker image to file
-      run: docker save -o laravel-app.tar laravel-app
+      run: docker save -o laravel-app.tar $(docker images --format "{{.Repository}}:{{.Tag}}" | grep laravel-app)
 
     - name: Generate artifact attestation
       uses: actions/attest-build-provenance@v1
